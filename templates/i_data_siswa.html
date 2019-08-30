@@ -1,0 +1,94 @@
+{% extends "material/base.html " %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SMS GATEWAY</title>
+</head>
+
+<body>
+    {% include 'includes/sidenav.html' %}
+
+    <div style="padding: 20px">
+        <div class="card">
+            <div class="col s12" style="padding: 25px">
+                <button data-target="modal1" class="btn modal-trigger blue">Tambah</button>
+                <div class="row" style="padding: 10px">
+                    <table class="striped">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Siswa</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Alamat</th>
+                            <th>Kelas</th>
+                            <th>No Hp Orangtua</th>
+                            <th>Aksi</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Ega</td>
+                            <td>Laki</td>
+                            <td>Bandar Lampung</td>
+                            <td>9C</td>
+                            <td>908808980980</td>
+                            <td><a class="waves-effect waves-light btn green">Edit</a> <a
+                                    class="waves-effect waves-light btn red">Hapus</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <div class="row">
+                        <div>
+                            <label for="nama_siswa">Nama Siswa</label>
+                            <input placeholder="" id="nama_siswa" type="text" class="validate">
+                        </div>
+                        <div>
+                            <label for="jk">Jenis Kelamin</label>
+                            <input placeholder="" id="jk" type="text" class="validate">
+                        </div>
+                        <div>
+                            <label for="alamat">Alamat</label>
+                            <input placeholder="" id="alamat" type="text" class="validate">
+                        </div>
+                        <div>
+                            <label for="kelas">Kelas</label>
+                            <input placeholder="" id="kelas" type="text" class="validate">
+                        </div>
+                        <div>
+                            <label for="hp_ortu">No Hp Orang Tua</label>
+                            <input placeholder="" id="hp_ortu" type="number" class="validate">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="waves-effect waves-light btn green">Simpan</a>
+                    <a class="modal-close waves-effect waves-green btn-flat red" style="color: white">Batal</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+        var dropdown = document.querySelectorAll('.collapsible');
+        var isi = M.Collapsible.init(dropdown);
+        var data_siswa = document.querySelectorAll('.modal');
+        var modal1 = M.Modal.init(data_siswa);
+    });
+</script>
+
+</html>
+
+
+
+{% endblock %}

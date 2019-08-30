@@ -1,0 +1,33 @@
+{% extends "material/base.html " %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SMS GATEWAY</title>
+</head>
+
+<body>
+    {% include 'includes/sidenav.html' %}
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+        var dropdown = document.querySelectorAll('.collapsible');
+        var isi = M.Collapsible.init(dropdown);
+        var data_siswa = document.querySelectorAll('.modal');
+        var modal1 = M.Modal.init(data_siswa);
+    });
+</script>
+
+</html>
+
+
+
+{% endblock %}
