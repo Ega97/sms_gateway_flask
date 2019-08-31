@@ -1,4 +1,4 @@
-{% extends "material/base.html " %}
+{% extends "material/base.html" %}
 {% block content %}
 
 <!DOCTYPE html>
@@ -29,48 +29,89 @@
                             <th>No Hp Orangtua</th>
                             <th>Aksi</th>
                         </tr>
+                         {% for row in form %}
                         <tr>
-                            <td>1</td>
-                            <td>Ega</td>
-                            <td>Laki</td>
-                            <td>Bandar Lampung</td>
-                            <td>9C</td>
-                            <td>908808980980</td>
-                            <td><a class="waves-effect waves-light btn green">Edit</a> <a
-                                    class="waves-effect waves-light btn red">Hapus</a></td>
+                            <td>{{loop.index}} </td>
+                            <td>{{row.1}}</td>
+                            <td>{{row.2}}</td>
+                            <td>{{row.3}}</td>
+                            <td>{{row.4}}</td>
+                            <td>{{row.5}}</td>
+                            <td><button data-toggle="modal" data-target="#modalEdit{{row.0}}" class="btn modal-trigger blue waves-effect waves-light btn grey">Edit</button> 
+                            <a href="/hapus/{{ row.0 }}" name="id" class="waves-effect waves-light btn red" onclick= "return confirm('yakin ingin menghapus?')" >Hapus</a></td>
                         </tr>
+                        <div id="#modalEdit{{row.0}}" class="modal">
+                            <div class="modal-content">
+                                <div class="row">
+                                        <form method="POST" action = "{{url_for ('edit')}}" >
+                                    <div>
+                                        <label for="nama_siswa">Nama Siswa</label>
+                                        <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden" >
+                                        <input placeholder="" value="{{ row.1 }}" name="nama" id="nama_siswa" type="text" class="validate">
+                                    </div>
+                                    <div>
+                                        <label  for="jk">Jenis Kelamin</label>
+                                        <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden" >
+                                        <input placeholder="" value="{{ row.2 }}" name="jk" id="jk" type="text" class="validate">
+                                    </div>
+                                    <div>
+                                        
+                                        <label for="alamat">Alamat</label>
+                                        <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden" >
+                                        <input placeholder="" value="{{ row.3 }}" name="alamat" id="alamat" type="text" class="validate">
+                                    </div>
+                                    <div>
+                                        <label  for="kelas">Kelas</label>
+                                        <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden" >
+                                        <input placeholder=""value="{{ row.4 }}" name="kelas" id="kelas" type="text" class="validate">
+                                    </div>
+                                    <div>
+                                        <label   for="hp_ortu">No Hp Orang Tua</label>
+                                        <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden" >
+                                        <input placeholder="" value="{{ row.5 }}" name="hp_ortu" id="hp_ortu" type="text" class="validate">
+                                    </div>
+                                    <button type="submit"  methods = "POST" action = "{{url_for ('edit')}}" name="submit" class="waves-effect waves-light btn green">Simpan</button>
+                                <a class="modal-close waves-effect waves-green btn-flat red" style="color: white">Batal</a>     
+                                </form>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        {% endfor %}
                     </table>
                 </div>
             </div>
+
             <div id="modal1" class="modal">
                 <div class="modal-content">
                     <div class="row">
+                            <form method="POST"  action = "{{url_for ('simpan')}}" >
                         <div>
                             <label for="nama_siswa">Nama Siswa</label>
-                            <input placeholder="" id="nama_siswa" type="text" class="validate">
+                            <input placeholder="" name="nama" id="nama_siswa" type="text" class="validate">
+                       
                         </div>
                         <div>
-                            <label for="jk">Jenis Kelamin</label>
-                            <input placeholder="" id="jk" type="text" class="validate">
+                            <label  for="jk">Jenis Kelamin</label>
+                            <input placeholder="" name="jk" id="jk" type="text" class="validate">
                         </div>
                         <div>
                             <label for="alamat">Alamat</label>
-                            <input placeholder="" id="alamat" type="text" class="validate">
+                            <input placeholder="" name="alamat" id="alamat" type="text" class="validate">
                         </div>
                         <div>
-                            <label for="kelas">Kelas</label>
-                            <input placeholder="" id="kelas" type="text" class="validate">
+                            <label  for="kelas">Kelas</label>
+                            <input placeholder=""name="kelas" id="kelas" type="text" class="validate">
                         </div>
                         <div>
-                            <label for="hp_ortu">No Hp Orang Tua</label>
-                            <input placeholder="" id="hp_ortu" type="number" class="validate">
+                            <label   for="hp_ortu">No Hp Orang Tua</label>
+                            <input placeholder="" name="hp_ortu" id="hp_ortu" type="text" class="validate">
                         </div>
+                        <button type="submit"  methods = "POST" action = "{{url_for ('simpan')}}" name="submit" class="waves-effect waves-light btn green">Simpan</button>
+                    <a class="modal-close waves-effect waves-green btn-flat red" style="color: white">Batal</a>     
+                    </form>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <a class="waves-effect waves-light btn green">Simpan</a>
-                    <a class="modal-close waves-effect waves-green btn-flat red" style="color: white">Batal</a>
-                </div>
+                </div>            
             </div>
         </div>
 
