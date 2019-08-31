@@ -50,6 +50,11 @@ def hapus(_id):
 @app.route('/i_data_siswa',methods = ['GET','POST'])
 def i_data_siswa():
     return render_template('i_data_siswa.html')
+
+ 
+@app.route('/i_data_pelanggar')
+def i_data_pelanggar():
+    return render_template('i_data_pelanggar.html')
  
 @app.route('/')
 def index():

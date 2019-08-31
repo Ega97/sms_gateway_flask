@@ -1,0 +1,186 @@
+{% extends "material/base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    {% include 'includes/sidenav.html' %}
+    <!-- tambah pelanggaran -->
+    <div style="padding: 20px">
+        <div class="card">
+            <div class="col s8" style="padding: 25px">
+                <button data-target="modal1" class="btn modal-trigger blue">Tambah</button>
+                <div class="row" style="padding: 10px">
+                    <table class="striped">
+                        <tr>
+                            <th>No</th>
+                            <th>NIS</th>
+                            <th>Nama</th>
+                            <th>Kelas</th>
+                            <th>Jenis Pelanggaran</th>
+                            <th>Poin</th>
+                            <th>Aksi</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><button data-toggle="modal" data-target="#modalEdit{{row.0}}"
+                                    class="btn modal-trigger blue waves-effect waves-light btn grey">Edit</button>
+                                <a href="/hapus/{{ row.0 }}" name="id" class="waves-effect waves-light btn red"
+                                    onclick="return confirm('yakin ingin menghapus?')">Hapus</a></td>
+                        </tr>
+
+                        <!-- modal edit -->
+                        <div id="#modalEdit{{row.0}}" class="modal">
+                            <div class="modal-content">
+                                <div class="row">
+                                    <form method="POST" action="{{url_for ('simpan')}}">
+                                        <div>
+                                            <label for="nama_siswa">NIS</label>
+                                            <input placeholder="" name="nama" id="nama_siswa" type="text"
+                                                class="validate">
+
+                                        </div>
+                                        <div>
+                                            <label for="jk">Nama Siswa</label>
+                                            <input placeholder="" name="jk" id="jk" type="text" class="validate">
+                                        </div>
+                                        <div>
+                                            <label for="alamat">kelas</label>
+                                            <input placeholder="" name="alamat" id="alamat" type="text"
+                                                class="validate">
+                                        </div>
+                                        <div>
+                                            <label for="kelas">Kelas</label>
+                                            <input placeholder="" name="kelas" id="kelas" type="text" class="validate">
+                                        </div>
+                                        <div>
+                                            <label for="hp_ortu">Jenis Pelanggaran</label>
+                                            <input placeholder="" name="hp_ortu" id="hp_ortu" type="text"
+                                                class="validate">
+                                        </div>
+                                        <div>
+                                            <label for="hp_ortu">Poin</label>
+                                            <input placeholder="" name="hp_ortu" id="hp_ortu" type="text"
+                                                class="validate">
+                                        </div>
+                                        <button type="submit" methods="POST" action="{{url_for ('simpan')}}"
+                                            name="submit" class="waves-effect waves-light btn green">Simpan</button>
+                                        <a class="modal-close waves-effect waves-green btn-flat red"
+                                            style="color: white">Batal</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- batas modal edit -->
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- batas tambah pelanggaran  -->
+
+    <!-- cari siswa per orang -->
+    <div style="padding: 20px">
+        <div class="row">
+            <div class="col s3">
+                <div class="input-field col s12">
+                    <input id="first_name" type="text" class="validate">
+                    <label for="first_name">Cari Siswa</label>
+                </div>
+            </div>
+            <div style="margin-top: 20px" class="col s2">
+                <a class="waves-effect waves-light btn-large" href="#"><i class="material-icons">search</i></a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="col s6" style="padding: 25px">
+                <div class="row" style="padding: 10px">
+                    <table class="display">
+                        <tr>
+                            <th>No</th>
+                            <th>NIS</th>
+                            <th>Nama</th>
+                            <th>Kelas</th>
+                            <th>Jenis Pelanggaran</th>
+                            <th>Jumlah Poin</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- batas cari siswa per orang -->
+
+
+    <!-- modal tambah -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <form method="POST" action="{{url_for ('simpan')}}">
+                    <div>
+                        <label for="nama_siswa">NIS</label>
+                        <input placeholder="" name="nama" id="nama_siswa" type="text" class="validate">
+                    </div>
+                    <div>
+                        <label for="jk">Nama Siswa</label>
+                        <input placeholder="" name="jk" id="jk" type="text" class="validate">
+                    </div>
+                    <div>
+                        <label for="alamat">kelas</label>
+                        <input placeholder="" name="alamat" id="alamat" type="text" class="validate">
+                    </div>
+                    <div>
+                        <label for="kelas">Kelas</label>
+                        <input placeholder="" name="kelas" id="kelas" type="text" class="validate">
+                    </div>
+                    <div>
+                        <label for="hp_ortu">Jenis Pelanggaran</label>
+                        <input placeholder="" name="hp_ortu" id="hp_ortu" type="text" class="validate">
+                    </div>
+                    <div>
+                        <label for="hp_ortu">Poin</label>
+                        <input placeholder="" name="hp_ortu" id="hp_ortu" type="text" class="validate">
+                    </div>
+                    <button type="submit" methods="POST" action="{{url_for ('simpan')}}" name="submit"
+                        class="waves-effect waves-light btn green">Simpan</button>
+                    <a class="modal-close waves-effect waves-green btn-flat red" style="color: white">Batal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- batas modal tambah -->
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+        var dropdown = document.querySelectorAll('.collapsible');
+        var isi = M.Collapsible.init(dropdown);
+        var data_siswa = document.querySelectorAll('.modal');
+        var modal1 = M.Modal.init(data_siswa);
+    });
+</script>
+
+</html>
+{% endblock %}
