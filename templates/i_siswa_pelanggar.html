@@ -14,24 +14,24 @@
 
 <body>
     {% include 'includes/sidenav.html' %}
-    <div style="padding: 20px">
+    <div style="padding: 20px">{{row.1}}
         <div class="card">
             <div class="col s12" style="padding: 25px">
-                <button data-target="modal1" class="btn modal-trigger blue">Tambah</button> 
+                <button data-target="modal1" class="btn modal-trigger blue">Tambah</button><a style="margin-left: 10px" href="http://127.0.0.1:8080/cari_siswa_pelanggar" class="btn modal-trigger blue">Cari Per-Siswa</a>
                 <div class="row" style="padding: 10px">
                     <table id="example" class="display">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Siswa</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Alamat</th>
+                                <th>NIS</th>
+                                <th>Nama</th>
                                 <th>Kelas</th>
-                                <th>No Hp Orangtua</th>
+                                <th>Jenis Pelanggaran</th>
+                                <th>Poin</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        {% for row in form %}
+                        {% for row in data_pelanggar %}
                         <tbody>
                             <tr>
                                 <td>{{loop.index}} </td>
@@ -40,9 +40,9 @@
                                 <td>{{row.3}}</td>
                                 <td>{{row.4}}</td>
                                 <td>{{row.5}}</td>
-                                <td><button data-toggle="modal" data-target="#modalEdit{{row.0}}"
-                                        class="btn modal-trigger blue waves-effect waves-light btn grey">Edit</button>
-                                    <a href="/hapus/{{ row.0 }}" name="id" class="waves-effect waves-light btn red"
+                                <td><button data-toggle="modal" data-target="#modalEdit{{row.0}}"class="btn modal-trigger blue waves-effect waves-light btn grey">Edit</button>
+                                    <a href="/hapus_pelanggar/{{ row.0 }}" name="id"
+                                        class="waves-effect waves-light btn red"
                                         onclick="return confirm('yakin ingin menghapus?')">Hapus</a></td>
                             </tr>
                         </tbody>
@@ -50,40 +50,40 @@
                         <div id="#modalEdit{{row.0}}" class="modal">
                             <div class="modal-content">
                                 <div class="row">
-                                    <form method="POST" action="{{url_for ('edit')}}">
+                                    <form method="POST" action="{{url_for ('detail_pelanggar')}}">
                                         <div>
-                                            <label for="nama_siswa">Nama Siswa</label>
-                                            <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden">
-                                            <input placeholder="" value="{{ row.1 }}" name="nama" id="nama_siswa"
+                                            <label for="nis">NIS</label>
+                                            <input placeholder="" value="{{ row.0 }}" name="id_pelanggar" id="id_pelanggar" type="hidden">
+                                            <input placeholder="" value="{{ row.1 }}" name="nis" id="nis"
                                                 type="text" class="validate">
                                         </div>
                                         <div>
-                                            <label for="jk">Jenis Kelamin</label>
-                                            <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden">
-                                            <input placeholder="" value="{{ row.2 }}" name="jk" id="jk" type="text"
-                                                class="validate">
-                                        </div>
-                                        <div>
-
-                                            <label for="alamat">Alamat</label>
-                                            <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden">
-                                            <input placeholder="" value="{{ row.3 }}" name="alamat" id="alamat"
+                                            <label for="nama">Nama Siswa</label>
+                                            <input placeholder="" value="{{ row.0 }}" name="id_pelanggar" id="id_pelanggar" type="hidden">
+                                            <input placeholder="" value="{{ row.2 }}" name="nama" id="nama"
                                                 type="text" class="validate">
                                         </div>
                                         <div>
                                             <label for="kelas">Kelas</label>
-                                            <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden">
-                                            <input placeholder="" value="{{ row.4 }}" name="kelas" id="kelas"
+                                            <input placeholder="" value="{{ row.0 }}" name="id_pelanggar" id="id_pelanggar" type="hidden">
+                                            <input placeholder="" value="{{ row.3 }}" name="kelas" id="kelas" type="text"
+                                                class="validate">
+                                        </div>
+                                        <div>
+
+                                            <label for="jenis">Jenis Pelanggaran</label>
+                                            <input placeholder="" value="{{ row.0 }}" name="id_pelanggar" id="id_pelanggar" type="hidden">
+                                            <input placeholder="" value="{{ row.4 }}" name="jenis" id="jenis"
                                                 type="text" class="validate">
                                         </div>
                                         <div>
-                                            <label for="hp_ortu">No Hp Orang Tua</label>
-                                            <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden">
-                                            <input placeholder="" value="{{ row.5 }}" name="hp_ortu" id="hp_ortu"
+                                            <label for="poin">Poin</label>
+                                            <input placeholder="" value="{{ row.0 }}" name="id_pelanggar" id="id_pelanggar" type="hidden">
+                                            <input placeholder="" value="{{ row.5 }}" name="poin" id="poin"
                                                 type="text" class="validate">
                                         </div>
-                                        <button type="submit" methods="POST" action="{{url_for ('edit')}}" name="submit"
-                                            class="waves-effect waves-light btn green">Simpan</button>
+                                        <button type="submit" methods="POST" action="{{url_for ('edit_pelanggar')}}"
+                                            name="submit" class="waves-effect waves-light btn green">Simpan</button>
                                         <a class="modal-close waves-effect waves-green btn-flat red"
                                             style="color: white">Batal</a>
                                     </form>
@@ -100,29 +100,31 @@
             <div id="modal1" class="modal">
                 <div class="modal-content">
                     <div class="row">
-                        <form method="POST" action="{{url_for ('simpan')}}">
+                        <form method="POST" action="{{url_for ('simpan_pelanggar')}}">
                             <div>
-                                <label for="nama_siswa">Nama SiswaH</label>
-                                <input placeholder="" name="nama" id="nama_siswa" type="text" class="validate">
+                                <label for="nis">NIS</label>
+                                <input placeholder="" name="nis" id="nis" type="text" class="validate">
 
                             </div>
                             <div>
-                                <label for="jk">Jenis Kelamin</label>
-                                <input placeholder="" name="jk" id="jk" type="text" class="validate">
-                            </div>
-                            <div>
-                                <label for="alamat">Alamat</label>
-                                <input placeholder="" name="alamat" id="alamat" type="text" class="validate">
+                                <label for="nama">Nama Siswa</label>
+                                <input placeholder="" name="nama" id="nama" type="text" class="validate">
+
                             </div>
                             <div>
                                 <label for="kelas">Kelas</label>
                                 <input placeholder="" name="kelas" id="kelas" type="text" class="validate">
                             </div>
                             <div>
-                                <label for="hp_ortu">No Hp Orang Tua</label>
-                                <input placeholder="" name="hp_ortu" id="hp_ortu" type="text" class="validate">
+                                <label for="jenis">Jenis Pelanggaran</label>
+                                <input placeholder="" name="jenis" id="jenis" type="text" class="validate">
                             </div>
-                            <button type="submit" methods="POST" action="{{url_for ('simpan')}}" name="submit"
+                            <div>
+                                <label for="poin">Poin</label>
+                                <input placeholder="" name="poin" id="poin" type="text" class="validate">
+                            </div>
+
+                            <button type="submit" methods="POST" action="{{url_for ('simpan_pelanggar')}}" name="submit"
                                 class="waves-effect waves-light btn green">Simpan</button>
                             <a class="modal-close waves-effect waves-green btn-flat red" style="color: white">Batal</a>
                         </form>

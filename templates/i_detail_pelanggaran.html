@@ -1,0 +1,91 @@
+{% extends "material/base.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+     <title>SMS GATEWAY</title>
+</head>
+
+<body>
+     {% include 'includes/sidenav.html' %}
+     <div style="margin: 100px; margin-left:390px;margin-right:390px ">
+          <h1 style="color:gray">
+               <center>DETAIL PELANGGARAN SISWA</center>
+          </h1>
+          <hr style="color:gray">
+          
+          <table>
+                    
+               {% for row in detail %}
+               <div id="#modalDetail{{row.0}}" class="modal"></div>
+               <div class="modal-content">
+                         <div class="row">
+                             <form method="POST" action="{{url_for ('detail_pelanggar')}}">
+               <tr>
+                    <td> NIS </td>
+                    <td> : &nbsp; <input placeholder="" value="{{ row.0 }}" name="id_pelanggar" id="id_pelanggar" type="hidden">
+                                  <input placeholder="" value="{{ row.1 }}" name="nis" id="nis" type="text" class="validate">
+                    </td>
+               </tr>
+               <tr>
+                    <td> Nama </td>
+                    <td> : &nbsp;  <input placeholder="" value="{{ row.0 }}" name="id_pelanggar" id="id_pelanggar" type="hidden">
+                                    <input placeholder="" value="{{ row.2 }}" name="nama" id="nama" type="text" class="validate"> </td>
+               </tr>
+               <tr>
+                    <td> Jenis Kelamin </td>
+                    <td> : &nbsp; {{row.0}} </td>
+               </tr>
+               <tr>
+                    <td> Kelas </td>
+                    <td> : &nbsp; <input placeholder="" value="{{ row.0 }}" name="id_pelanggar" id="id_pelanggar" type="hidden">
+                         <input placeholder="" value="{{ row.3 }}" name="kelas" id="kelas" type="text"
+                             class="validate"> </td>
+               </tr>
+               <tr>
+                    <td> Alamat </td>
+                    <td> : &nbsp; {{row.4}} </td>
+               </tr>
+               <tr>
+                    <td> Hp Orangtua </td>
+                    <td> : &nbsp; {{row.5}} </td>
+               </tr>
+               <tr>
+                    <td> Poin Baik</td>
+                    <td>: &nbsp; {{row.0}} </td>
+               </tr>
+               <tr>
+                    <td> Poin Buruk </td>
+                    <td> : &nbsp; {{row.0}} </td>
+               </tr>
+               <tr>
+                    <td> Keterangan </td>
+                    <td> : &nbsp; Baik </td>
+               </tr>
+               
+               {% endfor %}
+               
+          </table>
+     </div>
+
+</body>
+
+<script>
+     document.addEventListener('DOMContentLoaded', function () {
+          var elems = document.querySelectorAll('.sidenav');
+          var instances = M.Sidenav.init(elems);
+          var dropdown = document.querySelectorAll('.collapsible');
+          var isi = M.Collapsible.init(dropdown);
+          var data_siswa = document.querySelectorAll('.modal');
+          var modal1 = M.Modal.init(data_siswa);
+     });
+</script>
+
+</html>
+{% endblock %}

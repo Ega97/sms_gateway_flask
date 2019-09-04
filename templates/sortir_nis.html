@@ -1,0 +1,123 @@
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <title>Document</title>
+</head>
+<body> 
+  
+        <div class="card">
+            <div class="col s6" style="padding: 25px">
+                <div class="row" style="padding: 10px">
+                        <table id="example" class="display" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>NIS</th>
+                                        <th>Nama</th>
+                                        <th>Kelas</th>
+                                        <th>Jenis Pelanggaran</th>
+                                        <th>Poin</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+        
+                                <tbody>
+                                    {% for row in pelanggar %}
+                                    <tr>
+        
+                                        <td>{{loop.index}} </td>
+                                        <td>{{row.1}}</td>
+                                        <td>{{row.2}}</td>
+                                        <td>{{row.3}}</td>
+                                        <td>{{row.4}}</td>
+                                        <td>{{row.5}}</td>
+                                        <td><button data-toggle="modal" data-target="#modalEdit{{row.0}}"
+                                                class="btn modal-trigger blue waves-effect waves-light btn grey">Edit</button>
+                                            <a href="/hapus_pelanggar/{{ row.0 }}" name="id"
+                                                class="waves-effect waves-light btn red"
+                                                onclick="return confirm('yakin ingin menghapus?')">Hapus</a></td>
+                                    </tr>
+                                    <!-- EDIT MODAL -->
+                                    <div id="#modalEdit{{row.0}}" class="modal">
+                                        <div class="modal-content">
+                                            <div class="row">
+                                                <form method="POST" action="{{url_for ('edit_pelanggar')}}">
+                                                    <div>
+                                                        <label for="nis">NIS</label>
+                                                        <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden">
+                                                        <input placeholder="" value="{{ row.1 }}" name="nis" id="nis"   class="validate">
+                                                    </div>
+                                                    <div>
+                                                        <label for="nama_siswa">Nama Siswa</label>
+                                                        <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden">
+                                                        <input placeholder="" value="{{ row.2 }}" name="nama_siswa" id="nama_siswa" type="text"
+                                                            class="validate">
+                                                    </div>
+                                                    <div>
+                                                        <label for="kelas">Kelas</label>
+                                                        <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden">
+                                                        <input placeholder="" value="{{ row.3 }}" name="kelas" id="kelas" type="text"
+                                                            class="validate">
+                                                    </div>
+                                                    <div>
+                                                        <label for="jenis">Jenis Pelanggaran</label>
+                                                        <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden">
+                                                        <input placeholder="" value="{{ row.4 }}" name="jenis" id="jenis" type="text"
+                                                            class="validate">
+                                                    </div>
+                                                    <div>
+                                                        <label for="poin">Poin</label>
+                                                        <input placeholder="" value="{{ row.0 }}" name="id" id="id" type="hidden">
+                                                        <input placeholder="" value="{{ row.5 }}" name="poin" id="poin" type="text"
+                                                            class="validate">
+                                                    </div>
+        
+                                                    <button type="submit" methods="POST" action="{{url_for ('edit_pelanggar')}}"
+                                                        name="submit" class="waves-effect waves-light btn green">Simpan</button>
+                                                    <a class="modal-close waves-effect waves-green btn-flat red"
+                                                        style="color: white">Batal</a>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- EDIT MODAL AKHIR -->
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "order": [
+                    [3, "desc"]
+                ]
+            });
+        });
+    </script>
+    <!-- batas cari siswa per orang -->
+</body>
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+            var dropdown = document.querySelectorAll('.collapsible');
+            var isi = M.Collapsible.init(dropdown);
+            var data_siswa = document.querySelectorAll('.modal');
+            var modal1 = M.Modal.init(data_siswa);
+        });
+    </script>
+</html>
+{% endblock %}  
